@@ -43,42 +43,60 @@ scene.add(plight,alight);
 
 
 // Scene Objects
-const sun  = new Three.Mesh( 
-    new Three.SphereGeometry( 16, 64, 16 ),
+const sun = new Three.Mesh( 
+    new Three.SphereGeometry( 256, 16, 16 ),
     new Three.MeshBasicMaterial( { map: sun_texture } ),
 );
 
-const mercury  = new Three.Mesh( 
+const mercury = new Three.Mesh( 
     new Three.SphereGeometry( 16, 64, 16 ),
     new Three.MeshBasicMaterial( { map: mercury_texture } ),
 );
 
-const venus  = new Three.Mesh( 
+const venus = new Three.Mesh( 
     new Three.SphereGeometry( 16, 64, 16 ),
     new Three.MeshBasicMaterial( { map: venus_texture } ),
 );
 
-const earth  = new Three.Mesh( 
+const earth = new Three.Mesh( 
     new Three.SphereGeometry( 16, 64, 16 ),
     new Three.MeshBasicMaterial( { map: earth_texture } ),
 );
 
-const mars  = new Three.Mesh( 
+const mars = new Three.Mesh( 
     new Three.SphereGeometry( 16, 64, 16 ),
     new Three.MeshBasicMaterial( { map: mars_texture } ),
 );
 
-const cat    = new Three.Mesh(
+const cat = new Three.Mesh(
     new Three.BoxGeometry(3,3,3),
     new Three.MeshBasicMaterial( { map: cat_texture } ),
 );
 
-// Scene Objects Coordinates 
+// Scene Object(s) Positions 
+
+sun.position.x = 250;
+sun.position.y = 150;
+sun.position.z = -950;
+
+mercury.position.x = 75;
+mercury.position.y = 55;
+mercury.position.z = -700;
+
+venus.position.x = -250;
+venus.position.y = 50;
+venus.position.z = -350;
+
+earth.position.x = -10;
+earth.position.y = -10;
+earth.position.z = 0;
+
 mars.position.x = -50;
 mars.position.y = 50;
 mars.position.z = 350;
 
-scene.add(earth,mars);
+
+scene.add(sun,mercury,venus,earth,mars);
 // -----
 
 
@@ -102,7 +120,7 @@ function moveCamera() {
 
     // camera.position.x = t * -0.5;
     // camera.position.y = t * -0.5;
-    camera.position.z = t * -0.5;
+    camera.position.z = t * -0.1;
 
     // earth.position.x += 0.002;
     // earth.position.y -= 0.005;
@@ -117,8 +135,11 @@ moveCamera();
 function animate() {
     requestAnimationFrame( animate );
 
-    earth.rotation.y += 0.002;
-    mars.rotation.y  += 0.002;
+    sun.rotation.y      += 0.002;
+    mercury.rotation.y  += 0.002;
+    venus.rotation.y    += 0.002;
+    earth.rotation.y    += 0.002;
+    mars.rotation.y     += 0.002;
 
     control.update();
     render.render( scene, camera );
