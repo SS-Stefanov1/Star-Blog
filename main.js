@@ -1,4 +1,5 @@
-import './style.css';
+import './styles/style.css';
+import './styles/style.scss';
 import * as Three from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 
@@ -27,9 +28,6 @@ const control = new OrbitControls(camera,render.domElement);
 render.setPixelRatio( window.devicePixelRatio );
 render.setSize( window.innerWidth, window.innerHeight );
 
-// const grid = new Three.GridHelper();
-// scene.add(grid);
-
 camera.position.z = -20;
 camera.position.y = 0;
 camera.position.x = 0;
@@ -52,10 +50,9 @@ scene.add(point_light,point_light_helper,ambient_light);
 
 // Scene Objects
 const sun = new Three.Mesh( 
-    new Three.SphereGeometry( 256, 16, 16 ),
+    new Three.SphereGeometry( 208, 16, 16 ),
     new Three.MeshBasicMaterial( { map: sun_texture } ),
 );
-
 
 const mercury = new Three.Mesh( 
     new Three.SphereGeometry( 16, 64, 16 ),
@@ -155,7 +152,7 @@ const observer = new IntersectionObserver((entries) => {
     });
 });
 
-const fadeElements = document.querySelectorAll('.dummy,.center_it');
+const fadeElements = document.querySelectorAll('.dummy_left,.dummy_right,.dummy_center');
 fadeElements.forEach((el) => observer.observe(el));
 // -----
 
@@ -175,16 +172,7 @@ Array(2000).fill().forEach(addStars);
 
 function moveCamera() {
     const t = document.body.getBoundingClientRect().top;
-
-    // camera.position.x = t * -0.5;
-    // camera.position.y = t * -0.5;
     camera.position.z = t * -0.1;
-
-    // earth.position.x += 0.002;
-    // earth.position.y -= 0.005;
-
-    // mars.position.x -= 0.5;
-    // mars.position.y += 0.5;
 }
 document.body.onscroll = moveCamera;
 moveCamera();
